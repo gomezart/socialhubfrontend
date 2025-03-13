@@ -1,21 +1,24 @@
-const API_URL = "https://mysocialcoach-api.onrender.com"; // Replace with your actual backend URL
-
-export async function sendMessage(message, scenario) {
+export async function sendMessage(message, scenario = "dating") {
     try {
-        const response = await fetch(`${API_URL}/chat`, {
+        const response = await fetch("http://127.0.0.1:5000/chat", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message, scenario }) // Sending both message & scenario
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message, scenario }),
         });
 
         if (!response.ok) {
-            throw new Error(`Server error: ${response.status}`);
+            const errorData = await response.json();
+            console.error("🔴 Server error:", errorData);
+            throw new Error(`Server error: ${response.status} - ${JSON.stringify(errorData)}`);
         }
 
         const data = await response.json();
+        console.log("🟢 AI Response:", data);
         return data;
     } catch (error) {
-        console.error("Error fetching AI response:", error);
+        console.error("🔴 Error fetching AI response:", error);
         return { response: "Error connecting to AI." };
     }
 }

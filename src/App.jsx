@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
-    const [scenario, setScenario] = useState("dating");
+    const [scenario, setScenario] = useState("dating"); // Default scenario
 
     const handleSendMessage = async () => {
         if (!message.trim()) return;
@@ -20,22 +20,28 @@ function App() {
 
     return (
         <div className="chat-container">
-            <header className="chat-header">SocialSphereHub AI</header>
+            <header className="chat-header">SocialSphereHub AI Chat</header>
+
+            {/* Scenario Selection */}
             <div className="scenario-selector">
-                <label>Choose a Scenario: </label>
+                <label>Choose a Scenario:</label>
                 <select value={scenario} onChange={(e) => setScenario(e.target.value)}>
                     <option value="dating">Dating</option>
                     <option value="networking">Networking</option>
                     <option value="confidence">Confidence</option>
                 </select>
             </div>
+
+            {/* Chat Messages */}
             <div className="chat-box">
                 {messages.map((msg, index) => (
                     <div key={index} className={`chat-bubble ${msg.sender === "You" ? "user" : "ai"}`}>
-                        <span>{msg.sender}: {msg.text}</span>
+                        <span>{msg.text}</span>
                     </div>
                 ))}
             </div>
+
+            {/* Input & Send Button */}
             <div className="chat-input-box">
                 <input
                     type="text"
@@ -51,4 +57,6 @@ function App() {
 }
 
 export default App;
+
+
 
