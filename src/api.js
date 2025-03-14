@@ -1,6 +1,6 @@
 export async function sendMessage(message, scenario = "dating") {
     try {
-        const response = await fetch("https://socialhubbackend-fiz9.onrender.com/chat", { // Updated URL
+        const response = await fetch("https://socialhubbackend-fiz9.onrender.com/chat", { // ✅ Use the correct backend URL
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,6 +22,7 @@ export async function sendMessage(message, scenario = "dating") {
         return { response: "Error connecting to AI." };
     }
 }
+
 
 
 
